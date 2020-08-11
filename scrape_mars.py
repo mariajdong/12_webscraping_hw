@@ -68,7 +68,7 @@ def scrape():
     fact_df = fact_table[0]
 
     #convert to html table string w/ pandas, export
-    fact_df.to_html (fact_table.html)
+    fact_df.to_html ('fact_table.html')
 
 
     #5) USGS images
@@ -123,5 +123,5 @@ def scrape():
                  "jpl link": jpl_link,
                  "twitter weather": twitter_weather,
                  "hemispheres": hemi_list}
-                 
+
     return mars_data
