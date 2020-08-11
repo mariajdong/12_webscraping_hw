@@ -67,9 +67,8 @@ def scrape():
     fact_table = pd.read_html (fact_url)
     fact_df = fact_table[0]
 
-    #convert to html table string w/ pandas
-    fact_html = fact_df.to_html()
-    fact_html = fact_html.replace('\n', '')
+    #convert to html table string w/ pandas, export
+    fact_df.to_html (fact_table.html)
 
 
     #5) USGS images
@@ -110,13 +109,19 @@ def scrape():
         img_url = hemi_soup.find ('li').find ('a')['href']
         
         #assemble title & url dict entries, append to list
-        hemi_item = {'title': f'{hemi_titles[x]}',
-                    'img_url': f'{img_url}'}
+        hemi_item = {'title': hemi_titles[x],
+                    'img_url': img_url}
         
         hemi_list.append (hemi_item)
 
     #close browser after scraping
     browser.quit()
 
-    #return results
+    #list & return results
+    mars_data = {"news headline": news_h,
+                 "news description": news_p,
+                 "jpl link": jpl_link,
+                 "twitter weather": twitter_weather,
+                 "hemispheres": hemi_list}
+                 
     return mars_data
