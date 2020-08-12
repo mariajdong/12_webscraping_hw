@@ -44,10 +44,10 @@ def scrape():
 
 
     #3) twitter
-    #visit mars weather twitter account, delay 5 seconds before scraping to allow page to load
+    #visit mars weather twitter account, delay 10 seconds before scraping to allow page to load
     twitter_url = 'https://twitter.com/marswxreport?lang=en'
     browser.visit (twitter_url)
-    time.sleep(5)
+    time.sleep(10)
 
     #create another beautifulsoup object
     twitter_html = browser.html
@@ -67,8 +67,13 @@ def scrape():
     fact_table = pd.read_html (fact_url)
     fact_df = fact_table[0]
 
+    #label columns, set description as index
+    fact_df.columns = ["Description", "Values"]
+    fact_df = fact_df.set_index (['Description'])
+
     #convert to html table string w/ pandas, export
-    fact_df.to_html ('fact_table.html')
+    fact_html = fact_df.to_html()
+    fact_html = fact_html.replace('\n', '')
 
 
     #5) USGS images
@@ -118,10 +123,11 @@ def scrape():
     browser.quit()
 
     #list & return results
-    mars_data = {"news headline": news_h,
-                 "news description": news_p,
-                 "jpl link": jpl_link,
-                 "twitter weather": twitter_weather,
+    mars_data = {"news_headline": news_h,
+                 "news_description": news_p,
+                 "jpl_link": jpl_link,
+                 "table_html": fact_html,
+                 "twitter_weather": twitter_weather,
                  "hemispheres": hemi_list}
 
     return mars_data

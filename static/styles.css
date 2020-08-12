@@ -1,0 +1,41 @@
+body {
+    font-family: 'Ubuntu', sans-serif;
+    margin-bottom: 40px;
+    background-color: whitesmoke;
+}
+
+img {
+    max-width: 100%;
+}
+
+.jumbotron {
+    border:grey 1px solid;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: white;
+}
+
+.border-box {
+    border:grey 1px solid;
+    padding: 20px;
+    margin-bottom: 30px;
+    background-color: white;
+}
+
+.non-border-box {
+    margin-bottom: 30px;
+}
+
+.table-hover {
+    background-color: white;
+}
+
+.hemi-title {
+    margin-top: 20px;
+}
+
+@media (max-width: 800px) {
+    .display-3 {
+        font-size: 60px;
+    }
+}
